@@ -1,14 +1,14 @@
-# Python-OOP-
+🏦 Sistema Bancário com Python e POO 🐍
 
-Documento de Projeto: Sistema Bancário Simples com POO em Python
+Bem-vindo ao projeto do Sistema Bancário! Este repositório contém uma implementação de um sistema bancário simples, projetado para demonstrar de forma clara e prática os pilares fundamentais da Programação Orientada a Objetos (POO): Encapsulamento, Herança e Polimorfismo.
 
-Este documento descreve as etapas e requisitos para a construção de um Sistema Bancário simples, focado em demonstrar os pilares da Programação Orientada a Objetos (POO): Encapsulamento, Herança e Polimorfismo.
-1. Objetivo do Projeto
+🎯 1. Objetivo do Projeto
 
-O objetivo principal é criar um sistema funcional que permita gerenciar clientes e diferentes tipos de contas bancárias (corrente e poupança), aplicando os conceitos de POO de forma clara e organizada. Este projeto servirá como portfólio no seu GitHub para comprovar suas habilidades em POO em Python.
-2. Estrutura de Pastas e Arquivos
+O objetivo principal é criar um sistema funcional que permita gerenciar clientes e diferentes tipos de contas bancárias (corrente e poupança). Este projeto serve como uma peça de portfólio para demonstrar habilidades em design de software, organização de código e aplicação prática de conceitos de POO em Python.
 
-A organização do projeto é crucial. Siga a seguinte estrutura para manter o código modular e legível:
+📂 2. Estrutura de Pastas e Arquivos
+
+A organização do projeto é crucial para manter o código modular, legível e escalável. A estrutura adotada é a seguinte:
 
 sistema_bancario_oo/
 ├── src/
@@ -19,275 +19,174 @@ sistema_bancario_oo/
 ├── main.py              # Ponto de entrada do programa (interação com o usuário)
 └── README.md            # Documentação do projeto
 
-3. Implementação das Classes
+⚙️ 3. Implementação das Classes
 
-A seguir, a descrição detalhada de cada classe e seus requisitos. Lembre-se de aplicar o encapsulamento utilizando o prefixo _ para atributos que devem ser internos à classe, e forneça métodos "getters" para acessá-los.
-3.1. Classe ContaBancaria (src/conta.py)
+A seguir, a descrição detalhada de cada classe e seus requisitos.
 
-Esta é a classe base que define o comportamento comum a todas as contas.
+📄 Classe ContaBancaria (src/conta.py)
 
-    Atributos (privados/protegidos):
-
-        _numero_conta: str ou int (identificador único da conta).
-
-        _titular: str (nome do titular da conta).
-
-        _saldo: float (saldo atual da conta, inicializado em 0.0 por padrão).
-
-    Métodos:
-
-        __init__(self, numero_conta, titular, saldo_inicial=0.0): Construtor que inicializa os atributos.
-
-        depositar(self, valor):
-
-            Recebe um valor (float).
-
-            Se valor for positivo, adiciona ao _saldo.
-
-            Caso contrário, imprime uma mensagem de erro.
-
-            Imprime uma mensagem de sucesso e o novo saldo.
-
-        sacar(self, valor):
-
-            Recebe um valor (float).
-
-            Implementa a lógica padrão: se valor for positivo e _saldo for suficiente, subtrai do _saldo.
-
-            Imprime mensagens de sucesso/erro ("Saldo insuficiente.").
-
-            Retorna True em caso de sucesso, False caso contrário.
-
-            Este método será sobrescrito nas classes filhas para implementar regras específicas.
-
-        exibir_saldo(self): Imprime o número da conta, titular e o saldo atual.
-
-        get_numero_conta(self): Retorna o _numero_conta.
-
-        get_titular(self): Retorna o _titular.
-
-        get_saldo(self): Retorna o _saldo.
-
-        __str__(self): Retorna uma representação em string formatada da conta (e.g., "Conta: [numero] | Titular: [titular] | Saldo: R$[saldo]").
-
-3.2. Classe ContaCorrente (src/conta.py)
-
-Esta classe herda de ContaBancaria e adiciona a funcionalidade de cheque especial.
-
-    Herança: Deve herdar de ContaBancaria.
-
-    Atributos Adicionais (privados/protegidos):
-
-        _limite_cheque_especial: float (valor máximo que o saldo pode ficar negativo).
-
-    Métodos:
-
-        __init__(self, numero_conta, titular, saldo_inicial=0.0, limite_cheque_especial=0.0):
-
-            Chama o construtor da classe pai (super().__init__()).
-
-            Inicializa o _limite_cheque_especial.
-
-        sacar(self, valor):
-
-            Sobrescreve (Polimorfismo) o método sacar da ContaBancaria.
-
-            Permite o saque se o _saldo mais o _limite_cheque_especial for suficiente para cobrir o valor.
-
-            Atualiza o _saldo e imprime mensagens apropriadas.
-
-            Retorna True em caso de sucesso, False caso contrário.
-
-3.3. Classe ContaPoupanca (src/conta.py)
-
-Esta classe também herda de ContaBancaria e adiciona a funcionalidade de aplicação de juros.
-
-    Herança: Deve herdar de ContaBancaria.
-
-    Atributos Adicionais (privados/protegidos):
-
-        _taxa_juros: float (percentual de juros, e.g., 0.005 para 0.5%).
-
-    Métodos:
-
-        __init__(self, numero_conta, titular, saldo_inicial=0.0, taxa_juros=0.0):
-
-            Chama o construtor da classe pai (super().__init__()).
-
-            Inicializa a _taxa_juros.
-
-        aplicar_juros(self):
-
-            Calcula os juros (_saldo * _taxa_juros) e os adiciona ao _saldo.
-
-            Imprime uma mensagem de sucesso e o novo saldo.
-
-        sacar(self, valor):
-
-            Sobrescreve (Polimorfismo) o método sacar da ContaBancaria.
-
-            NÃO permite saque se o _saldo for insuficiente (não permite saldo negativo).
-
-            Retorna True em caso de sucesso, False caso contrário.
-
-3.4. Classe Cliente (src/cliente.py)
-
-Representa um cliente do banco, que pode possuir múltiplas contas.
+Esta é a classe base (superclasse) que define o comportamento e os atributos comuns a todas as contas do sistema.
 
     Atributos (privados/protegidos):
+
+        _numero_conta: str ou int (Identificador único da conta).
+
+        _titular: str (Nome do titular da conta).
+
+        _saldo: float (Saldo atual da conta, inicializado em 0.0).
+
+    Métodos:
+
+        __init__(self, numero_conta, titular, saldo_inicial=0.0): Construtor da classe.
+
+        depositar(self, valor): Adiciona um valor ao saldo, se for positivo.
+
+        sacar(self, valor): Lógica de saque padrão. Este método será sobrescrito (polimorfismo) nas classes filhas.
+
+        exibir_saldo(self): Mostra os detalhes da conta e o saldo atual.
+
+        get_numero_conta(self), get_titular(self), get_saldo(self): Getters para acesso seguro aos atributos.
+
+        __str__(self): Retorna uma representação textual formatada do objeto.
+
+💳 Classe ContaCorrente (src/conta.py)
+
+Herda de ContaBancaria e adiciona a funcionalidade de cheque especial.
+
+    Herança: Herda de ContaBancaria.
+
+    Atributos Adicionais:
+
+        _limite_cheque_especial: float (Valor máximo que o saldo pode ficar negativo).
+
+    Métodos:
+
+        __init__(...): Chama o construtor da classe pai (super().__init__()) e inicializa o limite.
+
+        sacar(self, valor): (Polimorfismo) Sobrescreve o método sacar, permitindo que o saque utilize o saldo mais o limite do cheque especial.
+
+💰 Classe ContaPoupanca (src/conta.py)
+
+Herda de ContaBancaria e adiciona a funcionalidade de rendimento de juros.
+
+    Herança: Herda de ContaBancaria.
+
+    Atributos Adicionais:
+
+        _taxa_juros: float (Percentual de juros a ser aplicado).
+
+    Métodos:
+
+        __init__(...): Chama o construtor da classe pai e inicializa a taxa de juros.
+
+        aplicar_juros(self): Calcula e adiciona os juros ao saldo da conta.
+
+        sacar(self, valor): (Polimorfismo) Sobrescreve o método sacar, não permitindo que o saldo fique negativo.
+
+👤 Classe Cliente (src/cliente.py)
+
+Representa um cliente do banco, que pode possuir uma ou mais contas.
+
+    Atributos:
 
         _nome: str.
 
-        _cpf: str (identificador único do cliente).
+        _cpf: str (Identificador único do cliente).
 
-        _contas: list (uma lista de objetos ContaBancaria, ContaCorrente ou ContaPoupanca).
-
-    Métodos:
-
-        __init__(self, nome, cpf): Construtor.
-
-        adicionar_conta(self, conta):
-
-            Recebe um objeto conta (instância de ContaBancaria ou suas subclasses).
-
-            Adiciona a conta à lista _contas.
-
-        remover_conta(self, numero_conta):
-
-            Remove uma conta da lista _contas pelo numero_conta.
-
-            Imprime mensagem de sucesso/erro.
-
-        listar_contas(self):
-
-            Imprime os detalhes de todas as contas associadas ao cliente.
-
-            Se não houver contas, informa.
-
-        encontrar_conta(self, numero_conta):
-
-            Procura e retorna o objeto ContaBancaria (ou subclasse) correspondente ao numero_conta.
-
-            Retorna None se a conta não for encontrada.
-
-        get_nome(self): Retorna o _nome.
-
-        get_cpf(self): Retorna o _cpf.
-
-        __str__(self): Retorna uma representação em string formatada do cliente.
-
-3.5. Classe Banco (src/banco.py)
-
-A classe que orquestra todo o sistema, gerenciando clientes e a criação/busca de contas.
-
-    Atributos (privados/protegidos):
-
-        _clientes: list (uma lista de objetos Cliente).
+        _contas: list (Agregação de objetos ContaBancaria).
 
     Métodos:
 
-        __init__(self): Construtor.
+        adicionar_conta(self, conta): Associa uma nova conta ao cliente.
 
-        adicionar_cliente(self, cliente):
+        remover_conta(self, numero_conta): Remove uma conta da lista do cliente.
 
-            Recebe um objeto cliente (instância de Cliente).
+        listar_contas(self): Exibe os detalhes de todas as contas do cliente.
 
-            Adiciona o cliente à lista _clientes.
+        encontrar_conta(self, numero_conta): Busca e retorna um objeto de conta específico.
 
-            Verifica se o CPF já existe para evitar duplicidade.
+🏛️ Classe Banco (src/banco.py)
 
-        encontrar_cliente(self, cpf):
+Classe orquestradora que gerencia todo o sistema, clientes e contas.
 
-            Procura e retorna o objeto Cliente correspondente ao cpf.
+    Atributos:
 
-            Retorna None se o cliente não for encontrado.
+        _clientes: list (Agregação de objetos Cliente).
 
-        criar_conta_para_cliente(self, cpf_cliente, tipo_conta, numero_conta, saldo_inicial=0.0, **kwargs):
+    Métodos:
 
-            Localiza o cliente pelo cpf_cliente. Se não encontrar, informa e retorna None.
+        adicionar_cliente(self, cliente): Adiciona um novo cliente, evitando duplicidade de CPF.
 
-            Verifica se o numero_conta já existe em alguma conta do banco para evitar duplicidade global.
+        encontrar_cliente(self, cpf): Busca e retorna um objeto cliente pelo seu CPF.
 
-            Cria uma nova conta (instância de ContaCorrente ou ContaPoupanca) com base em tipo_conta (e.g., "corrente", "poupanca").
+        criar_conta_para_cliente(...): Cria e associa uma conta (ContaCorrente ou ContaPoupanca) a um cliente existente.
 
-            Utiliza **kwargs para passar argumentos específicos (limite_cheque_especial, taxa_juros).
+        realizar_operacao(self, numero_conta, tipo_operacao, valor): Centraliza as operações de depósito e saque.
 
-            Adiciona a conta recém-criada ao cliente e imprime sucesso/erro.
+        exibir_todos_clientes_e_contas(self): Gera um relatório de todos os clientes e suas respectivas contas.
 
-            Retorna o objeto da conta criada.
+▶️ 4. Lógica Principal (main.py)
 
-        realizar_operacao(self, numero_conta, tipo_operacao, valor):
+Este é o ponto de entrada da aplicação. Ele fornece uma interface de linha de comando (CLI) simples para que o usuário possa interagir com o sistema bancário.
 
-            Encontra a conta pelo numero_conta.
+    Menu de Interação: Um loop while apresenta um menu com opções como:
 
-            Se a conta for encontrada, executa a tipo_operacao ("depositar" ou "sacar") com o valor.
+        Adicionar Cliente
 
-            Imprime mensagens de sucesso/erro.
+        Criar Conta
 
-        exibir_todos_clientes_e_contas(self):
+        Depositar
 
-            Itera sobre todos os clientes e, para cada cliente, chama listar_contas().
+        Sacar
 
-4. Lógica Principal do Programa (main.py)
+        Listar Contas de Cliente
 
-Este arquivo será o "ponto de entrada" do seu programa. Ele importará as classes e fornecerá uma interface de usuário simples (baseada em texto) para interagir com o sistema.
+        Aplicar Juros (Poupança)
 
-    Importações: Importe as classes necessárias de src.
+        Listar Todos os Clientes
 
-    Instanciação: Crie uma instância da classe Banco.
+        Sair
 
-    Menu de Interação:
+    Fluxo de Operações: Captura a entrada do usuário e chama os métodos apropriados da instância do Banco para executar a ação desejada.
 
-        Implemente um loop while que exiba um menu de opções para o usuário (ex: "1. Adicionar Cliente", "2. Criar Conta", "3. Depositar", "4. Sacar", "5. Listar Contas de Cliente", "6. Aplicar Juros (Poupança)", "7. Sair").
+    Tratamento de Entrada: Inclui validações básicas para garantir que os dados inseridos pelo usuário sejam consistentes.
 
-        Use input() para capturar a escolha do usuário.
+📖 5. Documentação e Execução
 
-        Utilize if/elif/else para direcionar a execução com base na escolha.
+    Título: Sistema Bancário Simples com Python e POO
 
-    Fluxo de Operações:
+    Descrição: O que o projeto faz e seus objetivos.
 
-        Adicionar Cliente: Solicita nome e CPF, cria um objeto Cliente e o adiciona ao Banco.
+    Tecnologias:
 
-        Criar Conta: Solicita CPF do cliente, tipo de conta (corrente/poupança), número da conta, saldo inicial e, se aplicável, limite de cheque especial ou taxa de juros. Chama o método criar_conta_para_cliente do Banco.
+    Conceitos de POO Aplicados:
 
-        Depositar/Sacar: Solicita número da conta, valor e o tipo de operação. Chama o método realizar_operacao do Banco.
+        Encapsulamento: Proteção dos atributos com _ e acesso via métodos (getters).
 
-        Listar Contas de Cliente: Solicita CPF e chama o listar_contas() do Cliente encontrado.
+        Herança: ContaCorrente e ContaPoupanca herdam de ContaBancaria.
 
-        Aplicar Juros (Conta Poupança): Solicita o número da conta, encontra a conta, verifica se é uma ContaPoupanca e chama aplicar_juros().
+        Polimorfismo: O método sacar se comporta de maneiras diferentes em cada tipo de conta.
 
-        Sair: Encerra o programa.
+    Como Executar:
 
-    Tratamento de Entrada: Valide as entradas do usuário (ex: números devem ser números, CPF deve ser string, etc.).
+        Clone o repositório: git clone <URL_DO_SEU_REPOSITORIO>
 
-5. Documentação para o GitHub (README.md final)
+        Navegue até a pasta do projeto: cd sistema_bancario_oo
 
-Ao final do projeto, crie ou atualize o arquivo README.md na raiz do seu repositório GitHub. Ele deve conter:
+        Execute o programa principal: python main.py
 
-    Título: Nome do projeto (ex: "Sistema Bancário Simples com Python e POO").
+    Autor: Seu Nome / Usuário do GitHub
 
-    Descrição: O que o projeto faz и seus objetivos.
+✨ 6. Critérios de Avaliação e Refinamento
 
-    Tecnologias: Python.
+O código foi desenvolvido seguindo as melhores práticas e com foco nos seguintes pontos:
 
-    Conceitos de POO Aplicados: Explique como você utilizou Encapsulamento, Herança e Polimorfismo no seu código.
+    ✅ Aplicação Correta dos Princípios de POO
 
-    Como Executar: Instruções claras sobre como clonar o repositório e rodar o main.py.
+    📂 Organização e Clareza do Código
 
-    Exemplos de Uso: Pequenos exemplos de como usar o menu do programa.
+    ✍️ Legibilidade (Nomes Significativos e Padrões)
 
-    Autor: Seu nome/usuário do GitHub.
+    🛡️ Tratamento de Erros e Validações Básicas
 
-6. Avaliação e Refinamento
-
-A avaliação do código será focada em:
-
-    Correta aplicação dos princípios de POO: Encapsulamento, Herança, Polimorfismo.
-
-    Organização do Código: Clareza das classes, métodos e estrutura de arquivos.
-
-    Legibilidade: Nomes de variáveis e métodos significativos, comentários úteis.
-
-    Tratamento de Erros: Validações básicas de entrada e lógicas de negócio.
-
-    Funcionalidade: O programa funciona como esperado.
+    🚀 Funcionalidade Conforme o Esperado
