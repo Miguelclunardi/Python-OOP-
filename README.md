@@ -2,6 +2,8 @@
 
 Bem-vindo ao projeto do Sistema Bancário! Este repositório contém uma implementação de um sistema bancário simples, projetado para demonstrar de forma clara e prática os pilares fundamentais da Programação Orientada a Objetos (POO): Encapsulamento, Herança e Polimorfismo.
 
+obs:readm provisorio para inicio de projeto
+
 🎯 1. Objetivo do Projeto
 
 O objetivo principal é criar um sistema funcional que permita gerenciar clientes e diferentes tipos de contas bancárias (corrente e poupança). Este projeto serve como uma peça de portfólio para demonstrar habilidades em design de software, organização de código e aplicação prática de conceitos de POO em Python.
